@@ -4,6 +4,7 @@ import '../widgets/image_slider.dart';
 import '../widgets/category_section.dart';
 import '../widgets/bottom_nav_bar.dart';
 
+
 class FishMarketScreen extends StatelessWidget {
   const FishMarketScreen({Key? key}) : super(key: key);
 
@@ -74,7 +75,7 @@ class FishMarketScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 }

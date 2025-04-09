@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fishflutter/screen/notification_screen.dart';
+import 'package:fishflutter/screen/cart_screen.dart'; // 
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Search Bar yang bisa diklik
+                // Search Bar
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/search');
@@ -51,9 +53,33 @@ class CustomAppBar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 20),
-                const Icon(Icons.notifications_none, color: Colors.black),
+
+                // Notifikasi
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.notifications_none, color: Colors.black),
+                ),
                 const SizedBox(width: 20),
-                const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+
+                // 🛒 Cart dengan navigasi
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CartScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+                ),
               ],
             ),
           ),
