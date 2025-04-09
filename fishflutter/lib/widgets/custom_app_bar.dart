@@ -13,39 +13,47 @@ class CustomAppBar extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 18.5,
-            backgroundImage: NetworkImage('https://cdn.builder.io/api/v1/image/assets/TEMP/e1331ad941180fed65b4ea5a603ef292262b0cb5'),
+            backgroundImage: NetworkImage(
+              'https://cdn.builder.io/api/v1/image/assets/TEMP/e1331ad941180fed65b4ea5a603ef292262b0cb5',
+            ),
           ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 259,
-                  height: 24,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFD1D1D6),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.search, size: 10, color: Colors.black),
-                      const SizedBox(width: 12),
-                      Text(
-                        'SEARCH',
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 11,
-                          color: Colors.black,
+                // Search Bar yang bisa diklik
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
+                  child: Container(
+                    width: 259,
+                    height: 24,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD1D1D6),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.search, size: 10, color: Colors.black),
+                        SizedBox(width: 12),
+                        Text(
+                          'SEARCH',
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 11,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(width: 20),
-                Icon(Icons.notifications_none, color: Colors.black),
+                const Icon(Icons.notifications_none, color: Colors.black),
                 const SizedBox(width: 20),
-                Icon(Icons.shopping_cart_outlined, color: Colors.black),
+                const Icon(Icons.shopping_cart_outlined, color: Colors.black),
               ],
             ),
           ),

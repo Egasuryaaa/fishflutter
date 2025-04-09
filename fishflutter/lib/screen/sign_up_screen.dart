@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fishflutter/screen/sign_in_screen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const SignInScreen(),
-    );
-  }
-}
-
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +29,7 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 63),
                     const Text(
-                      'SIGN IN',
+                      'SIGN UP',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 48,
@@ -51,75 +37,22 @@ class SignInScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 60),
-                    Container(
-                      height: 67,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD9FBFF),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.person_outline,
-                            size: 27,
-                            color: Colors.black,
-                          ),
-                          const SizedBox(width: 18),
-                          Expanded(
-                            child: TextField(
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Username",
-                                hintStyle: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                  fontFamily: 'Inter',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 31),
-                    Container(
-                      height: 67,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD9FBFF),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.lock_outline,
-                            size: 27,
-                            color: Colors.black,
-                          ),
-                          const SizedBox(width: 18),
-                          Expanded(
-                            child: TextField(
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Password",
-                                hintStyle: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                  fontFamily: 'Inter',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 31),
+                    const SizedBox(height: 40),
+                    _buildTextField(Icons.person_outline, "Username"),
+                    const SizedBox(height: 20),
+                    _buildTextField(Icons.email_outlined, "Email"),
+                    const SizedBox(height: 20),
+                    _buildTextField(Icons.lock_outline, "Password", isPassword: true),
+                    const SizedBox(height: 20),
+                    _buildTextField(Icons.lock_outline, "Confirm Password", isPassword: true),
+                    const SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: () {
-                        // Handle sign-in action
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInScreen(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF16717B),
@@ -129,7 +62,7 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ),
                       child: const Text(
-                        'SIGN IN',
+                        'SIGN UP',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -137,12 +70,12 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 37),
+                    const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Not a Member?,',
+                          'Already a member?',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
@@ -152,12 +85,16 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: () {
-                            // Handle sign up navigation
+                            Navigator.push(context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignInScreen(),
+                              ),
+                            );
                           },
                           child: const Text(
-                            'Sign Up now',
+                            'Sign In',
                             style: TextStyle(
-                              color: Colors.blue, // Warna lebih kontras
+                              color: Colors.blue,
                               fontSize: 14,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.bold,
@@ -172,6 +109,42 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(IconData icon, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      height: 67,
+      decoration: BoxDecoration(
+        color: const Color(0xFFD9FBFF),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 26),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 27,
+            color: Colors.black,
+          ),
+          const SizedBox(width: 18),
+          Expanded(
+            child: TextField(
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hint,
+                hintStyle: const TextStyle(
+                  color: Colors.black54,
+                  fontSize: 14,
+                  fontFamily: 'Inter',
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

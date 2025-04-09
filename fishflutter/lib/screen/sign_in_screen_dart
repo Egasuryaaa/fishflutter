@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fishflutter/screen/fish_market_screen.dart';
+import 'package:fishflutter/screen/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -15,8 +18,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +68,8 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 60),
+
+                    // Username Input
                     Container(
                       height: 67,
                       decoration: BoxDecoration(
@@ -65,18 +85,27 @@ class SignInScreen extends StatelessWidget {
                             color: Colors.black,
                           ),
                           const SizedBox(width: 18),
-                          Text(
-                            '| USERNAME',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontFamily: 'Inter',
+                          Expanded(
+                            child: TextField(
+                              controller: _usernameController,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Username",
+                                hintStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  fontFamily: 'Inter',
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
+
                     const SizedBox(height: 31),
+
+                    // Password Input
                     Container(
                       height: 67,
                       decoration: BoxDecoration(
@@ -87,25 +116,43 @@ class SignInScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.password,
+                            Icons.lock_outline,
                             size: 27,
                             color: Colors.black,
                           ),
                           const SizedBox(width: 18),
-                          Text(
-                            '| PASSWORD',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontFamily: 'Inter',
+                          Expanded(
+                            child: TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  fontFamily: 'Inter',
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
+
                     const SizedBox(height: 31),
+
+                    // Sign In Button
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Optional: validasi bisa ditambahkan di sini
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FishMarketScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF16717B),
                         minimumSize: const Size(110, 43),
@@ -122,7 +169,10 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: 37),
+
+                    // Sign Up Navigation
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -137,7 +187,12 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: () {
-                            // Handle sign up navigation
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUpScreen(),
+                              ),
+                            );
                           },
                           child: const Text(
                             'Sign Up now',

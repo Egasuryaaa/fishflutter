@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fishflutter/screen/sign_in_screen_dart';
+import 'package:fishflutter/screen/sign_in_screen.dart';
+import 'package:fishflutter/screen/fish_market_screen.dart';
+import 'package:fishflutter/screen/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignInScreen(), // Pastikan widget SignInScreen sudah benar
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SignInScreen(),
+        '/market': (context) => const FishMarketScreen(),
+        '/search': (context) => const SearchScreen(),
+      },
     );
   }
 }
